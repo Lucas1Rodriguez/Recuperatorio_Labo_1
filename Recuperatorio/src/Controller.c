@@ -20,7 +20,6 @@ int controller_loadFromText(char* path , LinkedList* pArrayListLibro)
 		{
 			if(parser_libroFromTextLec(auxA, pArrayListLibro)==0)
 			{
-				printf("Print3");
 				retorno=0;
 			}
 		}
@@ -82,17 +81,17 @@ int controller_OrdenamientoPorAutor(void* autor1, void* autor2)
 int controller_Descuentos(LinkedList* pArraylistLibro)
 {
 	int retorno=1;
-	int librosDescuento;
 	LinkedList* aux;
 	if(pArraylistLibro!=NULL)
 	{
-		librosDescuento = ll_map(pArraylistLibro,funcion_Descuentos);
-		if(librosDescuento >= 0)
+		if((aux = (LinkedList*)ll_map(pArraylistLibro,funcion_Descuentos))==0)
 		{
-			aux = (LinkedList*) librosDescuento;
-			if(controller_saveAsText("mapeado.csv",aux)==0)
+			if(aux != NULL)
 			{
-				retorno=0;
+				if(controller_saveAsText("mapeado.csv",aux)==0)
+				{
+					retorno=0;
+				}
 			}
 		}
 	}
@@ -181,3 +180,47 @@ int filter_Minotauro(void* pArrayListLibro)
 	}
 	return retorno;
 }
+
+int controller_ReduceRowling(LinkedList* pArrayListLibro)
+{
+	int retorno=-1;
+	LinkedList* aux;
+
+	if(pArrayListLibro!=NULL)
+	{
+		aux = (LinkedList*) ll_reduce(pArrayListLibro, reduce_Rowling);
+		if(aux != NULL)
+		{
+			printf("Entre Controller 2");
+			retorno=0;
+		}
+	}
+	return retorno;
+}
+
+int reduce_Rowling(void* pArrayListLibro)
+{
+	Libro* aux;
+	char auxAutor[CHARS_LEN];
+	int auxPrecio;
+	int acum = 0;
+	int cont = 0;
+	int promedio;
+
+	aux = (Libro*)pArrayListLibro;
+	if(aux!=NULL)
+	{
+		libro_getAutor(aux,auxAutor);
+		if(stricmp(auxAutor,"Rowling")==0)
+		{
+			printf("Entre Reduce 2");
+			libro_getPrecio(aux, &auxPrecio);
+			controller_listLibro(pArrayListLibro);
+			acum+=auxPrecio;
+			cont++;
+		}
+	}
+	promedio = acum / cont;
+	return promedio;
+}
+

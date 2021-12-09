@@ -27,9 +27,7 @@ int parser_libroFromTextLec(FILE* pFile , LinkedList* pArraylistLibro)
 			{
 				break;
 			}
-			printf("Llegue");
 			newLibro = libro_newParametros(bufferId,bufferTitulo,bufferAutor,bufferPrecio,bufferEditorialId);
-			printf("Entre");
 			ll_add(pArraylistLibro,newLibro);
 
 			retorno=0;

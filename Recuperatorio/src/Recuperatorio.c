@@ -50,7 +50,7 @@ int main(void) {
 	    do{
 	    	if(librosList != NULL)
 	    	{
-				if (utn_getNumeroInt(&option, "\nBienvenido \n1)Leer libros desde el archivo \n2)Ordenar libros por autor de manera ascendente \n3)Imprimir libros \n4)Hacer descuentos y generar archivo del mapeo \n5)Filtrar por editorial Minotauro \n6)Salir \n", "\nError opcion Invalida",  1, 6, 5)==0)
+				if (utn_getNumeroInt(&option, "\nBienvenido \n1)Leer libros desde el archivo \n2)Ordenar libros por autor de manera ascendente \n3)Imprimir libros \n4)Hacer descuentos y generar archivo del mapeo \n5)Filtrar por editorial Minotauro \n6)Reducir por Rowling \n7)Salir \n", "\nError opcion Invalida",  1, 7, 5)==0)
 				{
 					switch(option)
 					{
@@ -110,12 +110,22 @@ int main(void) {
 							}
 							break;
 						case 6:
-							printf("\nSaliendo");
+							if(controller_ReduceRowling(librosList)==0)
+							{
+								printf("\nSe redujo la lista por autor Rowling");
+							}
+							else
+							{
+								printf("\nNo se redujo");
+							}
+							break;
+						case 7:
+							printf("Saliendo");
 							break;
 					}
 				}
 	    	}
-		}while (option <6);
+		}while (option <7);
 
 
 return EXIT_SUCCESS;

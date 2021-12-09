@@ -11,10 +11,10 @@
 typedef struct
 {
 	int id;
-	char titulo;
-	char autor;
+	char titulo[250];
+	char autor[250];
 	int precio;
-	char editorialId;
+	char editorialId[250];
 }Libro;
 
 Libro* libro_new();

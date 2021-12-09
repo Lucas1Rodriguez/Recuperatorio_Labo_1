@@ -660,3 +660,23 @@ int ll_map(LinkedList* this,void (*pFunc)(void*))
 	}
 	return retorno;
 }
+
+int ll_reduce(LinkedList* this, int (*pFunc)(void*))
+{
+	int retorno=-1;
+	int i;
+	void* pAux;
+	if(this!=NULL && pFunc!=NULL)
+	{
+		for(i=0;i<ll_len(this);i++)
+		{
+			pAux=ll_get(this, i);
+			if(pAux != NULL)
+			{
+				pFunc(pAux);
+			}
+		}
+		retorno=0;
+	}
+	return retorno;
+}

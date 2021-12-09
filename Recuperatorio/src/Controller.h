@@ -7,3 +7,6 @@ void funcion_Descuentos(void* pArrayListLibro);
 int controller_saveAsText(char* path , LinkedList* pArrayListLibro);
 int controller_FilterMinotauro(LinkedList* pArrayListLibro);
 int filter_Minotauro(void* pArrayListLibro);
+int reduce_Rowling(void* pArrayListLibro);
+int controller_ReduceRowling(LinkedList* pArrayListLibro);
+
